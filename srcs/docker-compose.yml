@@ -1,0 +1,78 @@
+version: "3"
+services:
+  mariadb:
+    container_name: "mariadb"
+    build: ./requirements/mariadb 
+    image: mariadb
+    volumes:
+      - db_data:/var/lib/mysql
+    env_file:
+      - .env
+    restart: always
+    networks:
+      - inception_network
+    ports:
+      - "3306"
+    #expose : ["3306"] # est ce que cela permet ne pas exposer le port 3306 a l exterieur 
+
+  wordpress:
+    depends_on:
+      - mariadb
+    container_name: "wordpress"
+    build: ./requirements/wordpress 
+    image: wordpress
+    volumes:
+      - wp_data:/var/www/html
+    env_file:
+      - .env
+    ports:
+      - "9000:9000"
+    networks: 
+      - inception_network
+    restart: always
+
+ 
+  nginx:
+    build: ./requirements/nginx
+    image: nginx
+    container_name: "nginx"
+    depends_on:
+      - wordpress
+    restart: unless-stopped
+    ports:
+      - "443:443"
+    networks:
+      - inception_network
+    volumes:
+      - wp_data:/var/www/html
+
+  
+#declaration et directive des volumes 
+volumes:
+  db_data: 
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/$USER/data/mariadb
+
+  wp_data: 
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/$USER/data/wordpress
+
+networks:
+  inception_network:
+    name: inception_network
+    driver: bridge
+
+#driver :local --> hebergement sur la machine hote / machine local
+#type :  none --> aucun type specifique 
+# o: 'bind' --> permet la redirection vers le device en question (home/$USER...)
+# docker volume ls pour voir les volume créé
+# docker inspect <volume> pour voir le volume
+
+# image: creait le conteneur depuis l'image officielle
+# si mis aprres build, est juste utilisé pour renommer
