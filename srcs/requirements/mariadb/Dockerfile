@@ -12,7 +12,7 @@ RUN chmod 777 ./start.sh
 
 #RUN mkdir -p /data/mysql
 #RUN chown -R mysql:mysql /data/mysql
-RUN ./start.sh 
+#RUN ./start.sh 
 
 
 #CMD bash /run.sh

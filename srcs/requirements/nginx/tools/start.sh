@@ -1,4 +1,4 @@
-mkdir var/www/localhost
+#mkdir var/www/localhost
 mv default etc/nginx/sites-available/default
 
 service nginx start

@@ -1,11 +1,6 @@
 service mysql start
 
-
-echo Salut 
-#chown -R mysql:mysql /var/lib/mysql
-
-echo "CREATE DATABASE IF NOT EXISTS $MYSQL_WP_NAME;"
-echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$DB_MDP';"
-echo "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_MDP' WITH GRANT OPTION;"
-echo "FLUSH PRIVILEGES;"
-mysqladmin -u root password $ROOT_PWD
+mysql -u root -e "CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_MPD}';"
+mysql -u root -e "CREATE DATABASE '${DB_NAME}';"
+mysql -u root -e "USE '${DB_NAME}'; GRANT ALL PRIVILEGES ON * TO '${WP_USER}'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+mysql -u root -e "alter user 'root'@'localhost' identified by 'password'";

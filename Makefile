@@ -8,7 +8,8 @@ $(NAME): #build des images precisée dans yaml docker compose
 				sudo mkdir -p /home/$(USER)/data/mariadb
 				sudo mkdir -p /home/$(USER)/data/wordpress	
 				docker-compose -f $(SRC) build
-				docker-compose -f $(SRC) up -d --remove-orphans
+				docker-compose -f $(SRC) up -d 
+# --remove-orphans
 
 # arrete les conteneurs et efface les images nginx, wordpress et nginx
 clean:
