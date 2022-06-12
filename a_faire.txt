@@ -1,0 +1,3 @@
+Créer les dossier des volumes dans la VM
+Changer les $USER
+changer le host avec mon login

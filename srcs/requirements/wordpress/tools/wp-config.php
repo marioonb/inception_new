@@ -8,7 +8,7 @@
  *
  * This file contains the following configurations:
  *
- * * MySQL settings
+ * * Database settings
  * * Secret keys
  * * Database table prefix
  * * ABSPATH
@@ -18,36 +18,17 @@
  * @package WordPress
  */
 
-// https://github.com/rhubarbgroup/redis-cache/wiki/Connection-Parameters
-/** Redis hostname */
-define( 'WP_REDIS_HOST', getenv('REDIS_HOST') );
-
-/** Redis port */
-define( 'WP_REDIS_PORT', getenv('REDIS_PORT') );
-
-/** The timeout seconds for connection on redis */
-define( 'WP_REDIS_TIMEOUT', getenv('REDIS_CONNECTION_TIMEOUT_SECONDS') );
-
-/** The timeout seconds for read on redis */
-define( 'WP_REDIS_READ_TIMEOUT', getenv('REDIS_READ_TIMEOUT_SECONDS') );
-
-/** The logical database index on redis */
-define( 'WP_REDIS_DATABASE', getenv('REDIS_DB_INDEX') );
-
-/** True if do caching */
-define( 'WP_CACHE', true );
-
-// ** MySQL settings - You can get this info from your web host ** //
+// ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', getenv('DB_NAME') );
+define( 'DB_NAME', getenv('DB_NAME'));
 
-/** MySQL database username */
+/** Database username */
 define( 'DB_USER', getenv('DB_USER') );
 
-/** MySQL database password */
+/** Database password */
 define( 'DB_PASSWORD', getenv('DB_MDP') );
 
-/** MySQL hostname */
+/** Database hostname */
 define( 'DB_HOST', getenv('DB_HOST') );
 
 /** Database charset to use in creating database tables. */
@@ -67,17 +48,18 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
+define('AUTH_KEY',         'twbOojAa>=8%|4.jTRi/,a8:ik&+K-6Mv|39Y)vKf,/]nD`7[-I[.wj3v#KC*3>h');
+define('SECURE_AUTH_KEY',  'H9yw?ahgExNWbi{-|bakj3KT {Mg3us7zkl$6[rV][-=(7@))dxkL[B(2UN%S?+?');
+define('LOGGED_IN_KEY',    'goCh)-Sg,mz%5DQY^kOEL(7W.((ii2]rce| o%U*x+dC&C>Q?Xo`j=>x|bnqv+vA');
+define('NONCE_KEY',        'sU#_}J#J?;-:mQL8.42]ry3(Zf;tHRBCh=J^@+j4@+QWedv[WUyWza}{bGc9>A/C');
+define('AUTH_SALT',        '$_j[#qsK2f.f?l QrvQa_xxz%9kmQ|) t-}O-?I6yvX|o:CiP`vGe{vz-vpcYe&,');
+define('SECURE_AUTH_SALT', '#tcf7E5A&BKSt=~*<3W%c2+vel.r>)h7`:9/iAr3A-AH-k{-K B(x5U-I%./Yj3A');
+define('LOGGED_IN_SALT',   'u9{YtZ0ooAV+%MZkGQ&.+8sWrf-ojSX|h+s|VX(;YYd,HO  4JYLyABYci;$FjX2');
+define('NONCE_SALT',       'A)^^Kc0>@3p)>1|_6FBe|=3Q)Jn$6(*9caGX{+Pl@NOm+*-}PF^N.6i+>Eu#L|S.');
+
 
 /**#@-*/
-/* insert keys here */
-define('AUTH_KEY',         'vvH6]0o-mIp6>%nG^lLJlg9n{!p<|xG,@z24zNvkfR3^dNJ9-t%/yv@wvG5wsNO-');
-define('SECURE_AUTH_KEY',  '4t|wLj6Sui[,$|]TW!2rn;rQ^h8+Ajme.1_)I_=UV -CbAC8TUx+:/%gKwYabkB[');
-define('LOGGED_IN_KEY',    ']@LxE tWIAG*6M2]<.l{GP/n*`K<M`i&##W%R3A|jwRira@Uw0W]>qK>J;??~Km ');
-define('NONCE_KEY',        '%z0Ic0tu_7Tt7-(7De0c&QG%p`kK^$66Qd<6]F+9M81U!GD@*]kWS}h< :kv3|%+');
-define('AUTH_SALT',        'y|Tp&Ofj3R43QAoag=M3#c>v >a5uwmw9+pAU&E;:ya4w.vVJE2se8i~/kW`fo,s');
-define('SECURE_AUTH_SALT', '8kU[rC>.MKQT)hQnmohl_9+bA*+Dhbw6kdXSEn*J?027;%*FrpHdD-1i%J[`aTU&');
-define('LOGGED_IN_SALT',   'JJ@G$j{lXDRX!`)8S|:6tCRolFWNEN3qysEWy1K.kfc2=tfV>YdgFW.8HyOC|+=o');
-define('NONCE_SALT',       '[Sex%,Ln+R}mxRxguAns|mo`Bjk%P]i#mv%sEW)}KxX3J`s(`s:a|Lb5*i4^k(Z`');
+/**#@-*/
 
 /**
  * WordPress database table prefix.
@@ -105,12 +87,16 @@ define( 'WP_DEBUG', false );
 
 
 
+
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
-        define( 'ABSPATH', __DIR__ . '/' );
+	define( 'ABSPATH', __DIR__ . '/' );
 }
+
+define('WP_SITEURL', 'https://' . $_SERVER['HTTP_HOST']);
+define('WP_HOME', 'https://' . $_SERVER['HTTP_HOST']);
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
